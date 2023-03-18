@@ -62,27 +62,44 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Views\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Card.cs" />
+    <Compile Include="CustomGameWindow.xaml.cs">
+      <DependentUpon>CustomGameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RandomExtensions.cs" />
+    <Compile Include="Views\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NewUserWindow.xaml.cs">
+    <Compile Include="CardData.cs" />
+    <Compile Include="GameEngine.cs" />
+    <Compile Include="Views\GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewUserWindow.xaml.cs">
       <DependentUpon>NewUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayWindow.xaml.cs">
+      <DependentUpon>PlayWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="UserData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogIn.xaml.cs">
+    <Compile Include="Views\LogIn.xaml.cs">
       <DependentUpon>LogIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -111,11 +128,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="LogIn.xaml">
+    <Page Include="CustomGameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NewUserWindow.xaml">
+    <Page Include="Views\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LogIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +178,36 @@
     <Resource Include="Data\Images\giraffe.jpg" />
     <Resource Include="Data\Images\parrot.jpg" />
     <Resource Include="Data\Images\penguin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\AboutCard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\CardImages\item01.png" />
+    <Resource Include="Data\CardImages\item02.png" />
+    <Resource Include="Data\CardImages\item03.png" />
+    <Resource Include="Data\CardImages\item04.png" />
+    <Resource Include="Data\CardImages\item05.png" />
+    <Resource Include="Data\CardImages\item06.png" />
+    <Resource Include="Data\CardImages\item07.png" />
+    <Resource Include="Data\CardImages\item08.png" />
+    <Resource Include="Data\CardImages\item09.png" />
+    <Resource Include="Data\CardImages\item10.png" />
+    <Resource Include="Data\CardImages\item11.png" />
+    <Resource Include="Data\CardImages\item12.png" />
+    <Resource Include="Data\CardImages\item13.png" />
+    <Resource Include="Data\CardImages\item14.png" />
+    <Resource Include="Data\CardImages\item15.png" />
+    <Resource Include="Data\CardImages\item16.png" />
+    <Resource Include="Data\CardImages\item17.png" />
+    <Resource Include="Data\CardImages\item18.png" />
+    <Resource Include="Data\CardImages\item19.png" />
+    <Resource Include="Data\CardImages\item20.png" />
+    <Resource Include="Data\CardImages\item21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\logo1.png" />
+    <Resource Include="Data\logo2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

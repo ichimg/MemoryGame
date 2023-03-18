@@ -1,0 +1,48 @@
+﻿<Window x:Class="PairsGame.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PairsGame"
+        mc:Ignorable="d"
+        Title="GameWindow" Height="650" Width="1100">
+    
+    <Window.DataContext>
+        <local:CardData/>
+    </Window.DataContext>
+    
+    <Grid>
+        <ItemsControl ItemsSource="{Binding ButtonCards}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel HorizontalAlignment="Center" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Button Name="EmptyButton"
+                                        Width= "151"	
+                                        Height = "93"	
+                                        Margin="10"
+                                    Click="ToggleButton_Click">
+                                    </Button>
+                                    <Button Name="CardButton"
+                                        Width= "151"	
+                                        Height = "93"	
+                                        Margin="10" Visibility="Collapsed">
+                                        <Image Source="{Binding}"/>
+                                    </Button>
+                                </Grid>
+                                
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>

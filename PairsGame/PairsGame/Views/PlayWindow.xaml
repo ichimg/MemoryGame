@@ -1,0 +1,32 @@
+﻿<Window x:Class="PairsGame.PlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PairsGame"
+        mc:Ignorable="d"
+        Title="PlayWindow" Height="300" Width="400">
+    <DockPanel>
+        <Menu Name="MenuControl" DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="New Game" Click="FileNeGameClick"/>
+                <MenuItem Header="Open Game" />
+                <MenuItem Header="Save Game" />
+                <MenuItem Header="Statistics" />
+                <Separator />
+                <MenuItem Header="Exit" Click="FileExitClick"/>
+            </MenuItem>
+            <MenuItem Header="Options">
+                <MenuItem Header="Standard" Click="OptionsStandardClick"/>
+                <MenuItem Header="Custom" Click="OptionsCustomClick"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About..." Click="HelpAboutClick"/>
+            </MenuItem>
+
+        </Menu>
+        <Image Source ="/PairsGame;component/Data/logo1.png" DockPanel.Dock="Top" Height="78" Width="301"/>
+        <Image Source="/PairsGame;component/Data/logo2.png" Width="212" Height="142"/>
+    </DockPanel>
+
+</Window>
