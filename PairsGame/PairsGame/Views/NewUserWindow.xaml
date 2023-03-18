@@ -12,15 +12,16 @@
     </Window.DataContext>
     <Grid>
         <Label FontSize="30" FontFamily="Micro Six" Content="Enter your name:" Margin="48,55,400,252"/>
-        <Label FontSize="25" FontFamily="Micro Six" Content="Select your avatar ->" Margin="48,217,312,123"/>
+        <Label FontSize="25" FontFamily="Micro Six" Content="Select your picture ->" Margin="48,217,312,123"/>
         <TextBox Name="NameTextBox" FontSize="30" HorizontalAlignment="Left" Margin="405,58,0,0" KeyDown="EnterButtonPressed" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="368" Text="" TextChanged="TextBox_TextChanged"/>
-        <Image Name="AvatarImage" Source="{Binding ImagePaths[0]}" HorizontalAlignment="Left" Height="189" Margin="488,163,0,0" VerticalAlignment="Top" Width="254"  RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"/>
+        <Image Name="AvatarImage" HorizontalAlignment="Left" Height="189" Margin="488,163,0,0" VerticalAlignment="Top" Width="254"  RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"/>
         <Button Style="{StaticResource OrangeButton}" Content=">>" FontSize="15" HorizontalAlignment="Left" Width="110" Margin="638,372,0,0" VerticalAlignment="Top" Click="NextImageButtonClick"/>
         <Button Style="{StaticResource OrangeButton}" FontSize="15" HorizontalAlignment="Left" Width="110" Margin="479,372,0,0" VerticalAlignment="Top" Click="PreviousImageButtonClick">
             <Button.Content>
                 <TextBlock>	&lt;	&lt;</TextBlock>
             </Button.Content>
         </Button>
+        <Rectangle HorizontalAlignment="Left" Height="189" Margin="488,163,0,0" Stroke="Black" VerticalAlignment="Top" Width="254"/>
     </Grid>
 
 </Window>

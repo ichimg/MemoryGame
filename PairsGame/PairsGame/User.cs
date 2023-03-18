@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Security.Policy;
 
 namespace PairsGame
 {
@@ -19,6 +18,7 @@ namespace PairsGame
             Name = name;
             ImagePath = imagePath;
             Guid = guid;
+
         }
 
         public void CreateUserFile()

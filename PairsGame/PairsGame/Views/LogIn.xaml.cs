@@ -52,7 +52,9 @@ namespace PairsGame
 
         private void PlayButtonClick(object sender, RoutedEventArgs e)
         {
-
+            PlayWindow playWindow = new PlayWindow();
+            playWindow.Show();
+            Close();
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
