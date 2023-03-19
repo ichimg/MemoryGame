@@ -9,8 +9,9 @@ namespace PairsGame
         public string Name { get; private set; } 
         public string ImagePath { get; private set; }
         public Guid Guid { get; private set; }
+        public int GamesWon { get; set; }
 
-        public User(string name, string imagePath, Guid guid)
+        public User(string name, string imagePath, Guid guid, int gamesWon)
         {
             if(string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if(string.IsNullOrEmpty(imagePath)) throw new ArgumentException(nameof(imagePath));
@@ -18,7 +19,7 @@ namespace PairsGame
             Name = name;
             ImagePath = imagePath;
             Guid = guid;
-
+            GamesWon = gamesWon;
         }
 
         public void CreateUserFile()
@@ -35,6 +36,7 @@ namespace PairsGame
                 streamWriter.WriteLine(Name);
                 streamWriter.WriteLine(ImagePath);
                 streamWriter.WriteLine(Guid);
+                streamWriter.WriteLine(GamesWon);
             }
         }
 
@@ -57,6 +59,26 @@ namespace PairsGame
         public override int GetHashCode()
         {
             return (Name, ImagePath).GetHashCode();
+        }
+
+        public void CountWin()
+        {
+            GamesWon++;
+            var UserFilePath = Directory.GetFiles(@"../../Data/Users/")
+                .Where(x => x.Equals($"../../Data/Users/user-{Name}-{Guid}.txt")).First();
+
+            string[] lines = File.ReadAllLines(UserFilePath);
+            int lineIndex = 3;
+
+            lines[lineIndex] = GamesWon.ToString();
+
+            using (StreamWriter writer = new StreamWriter(UserFilePath))
+            {
+                foreach (string line in lines)
+                {
+                    writer.WriteLine(line);
+                }
+            }
         }
     }
 }

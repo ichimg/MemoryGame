@@ -19,7 +19,7 @@ namespace PairsGame
         public LogIn()
         {
             InitializeComponent();
-            userData= new UserData();
+            userData = new UserData();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -27,9 +27,9 @@ namespace PairsGame
             if (!(UserListBox.SelectedItem is User)) return;
 
             User selectedUser = UserListBox.SelectedItem as User;
-            Uri uri = new Uri(@userData.Users.First(user => user.Name == selectedUser.Name).ImagePath, uriKind:UriKind.Relative);
-            userImage.Source = new BitmapImage(uri);
             SelectedUser = selectedUser;
+            Uri uri = new Uri(SelectedUser.ImagePath, uriKind:UriKind.Relative);
+            userImage.Source = new BitmapImage(uri);
         }
 
         private void NewUserButtonClick(object sender, RoutedEventArgs e)

@@ -30,7 +30,8 @@ namespace PairsGame
             {
                 using (StreamReader streamReader = new StreamReader(userFile))
                 {
-                    Users.Add(new User (streamReader.ReadLine(), streamReader.ReadLine(), Guid.Parse(streamReader.ReadLine())));
+                    User user = new User(streamReader.ReadLine(), streamReader.ReadLine(), Guid.Parse(streamReader.ReadLine()), Int32.Parse(streamReader.ReadLine()));
+                    Users.Add(user);
                 }
             }
         }

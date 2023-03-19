@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PairsGame.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -58,8 +59,8 @@ namespace PairsGame
             }
 
             var savedBoard = DeserializeCards();
-
-            GameWindow gameWindow = new GameWindow(ActiveUser, savedBoard);
+            var currentLevel = DeserializeCurrentLevel();
+            GameWindow gameWindow = new GameWindow(ActiveUser, savedBoard, currentLevel);
             gameWindow.ShowDialog();
         }
 
@@ -85,12 +86,25 @@ namespace PairsGame
             return objectToSerialize.Cards;
         }
 
+        public int DeserializeCurrentLevel()
+        {
+            Serializer serializer = new Serializer();
+            ObjectToSerialize objectToSerialize = serializer.DeserializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt");
+            return objectToSerialize.CurrentLevel;
+        }
+
         private bool IsAnyGameSaved()
         {
             var saves = Directory.GetFiles("../../Data/Users/saves/").Where(x=> x == $"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt").ToList();
             if (saves.Count == 0)
                 return false;
             return true;
+        }
+
+        private void FileStatisticsClick(object sender, RoutedEventArgs e)
+        {
+            StatisticsWindow statisticsWindow = new StatisticsWindow();
+            statisticsWindow.ShowDialog();
         }
     }
 }

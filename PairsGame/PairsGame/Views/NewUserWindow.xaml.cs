@@ -55,7 +55,7 @@ namespace PairsGame
         {
             if (e.Key != Key.Enter) return;
             Guid guid= Guid.NewGuid();
-            User newUser = new User(NameTextBox.Text, UserData.ImagePaths[currentAvatar], guid);
+            User newUser = new User(NameTextBox.Text, UserData.ImagePaths[currentAvatar], guid, 0);
             newUser.CreateUserFile();
             LogIn LogInWindow = Application.Current.MainWindow as LogIn;
             LogInWindow.AddUser(newUser);

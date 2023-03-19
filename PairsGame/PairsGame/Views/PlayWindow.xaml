@@ -11,7 +11,7 @@
             <MenuItem Header="_File">
                 <MenuItem Header="New Game" Click="FileNewGameClick"/>
                 <MenuItem Header="Open Game" Click="FileOpenGameClick"/>
-                <MenuItem Header="Statistics" />
+                <MenuItem Header="Statistics" Click="FileStatisticsClick"/>
                 <Separator />
                 <MenuItem Header="Exit" Click="FileExitClick"/>
             </MenuItem>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PairsGame"
         mc:Ignorable="d"
-        Title="GameWindow" Height="650" Width="1100">
+        Title="GameWindow" Height="1080" Width="1920">
     
     <Window.DataContext>
         <local:CardData/>
@@ -19,18 +19,18 @@
                 <MenuItem Header="Save Game" Click="FileSaveGameClick" />
             </MenuItem>
         </Menu>
-        <ItemsControl ItemsSource="{Binding ButtonCards}">
+        <ItemsControl Name="CardItemsControl" ItemsSource="{Binding ButtonCards}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ItemsControl ItemsSource="{Binding}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel HorizontalAlignment="Center" />
+                                <WrapPanel Name="Wrap" HorizontalAlignment="Center" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Grid x:Name="buttonGrid">
                                     <Button Name="EmptyButton"
                                         Width= "151"	
                                         Height = "93"	
@@ -41,7 +41,7 @@
                                         Width= "151"	
                                         Height = "93"	
                                         Margin="10" Visibility="Collapsed">
-                                        <Image Source="{Binding }"/>
+                                        <Image Source="{Binding}"/>
                                     </Button>
                                 </Grid>
                                 
@@ -51,5 +51,9 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <Button Style="{StaticResource OrangeButton}" Name="NextLevel" Width= "151"	Content="Next level" FontSize="20"
+                                        Height = "50" Visibility="Visible" Margin="1300, 660, 0, 0" Click="NextLevelClick"/>
+
+        <Image Name="ActiveUserImage" Source="/PairsGame;component/Data/images/lion.jpeg" Height="200" Width="200" Margin="-1250, 560, 0, 0" Stretch="Fill"/>
     </Grid>
 </Window>
