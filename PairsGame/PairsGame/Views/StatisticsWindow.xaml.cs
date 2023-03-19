@@ -21,7 +21,9 @@ namespace PairsGame.Views
     {
         public StatisticsWindow()
         {
+            UserData userData = new UserData();
             InitializeComponent();
+            StatisticsView.ItemsSource = userData.Users;
         }
 
     }

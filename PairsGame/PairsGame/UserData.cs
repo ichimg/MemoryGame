@@ -24,7 +24,7 @@ namespace PairsGame
 
         private void GetUsersFromFiles()
         {
-            var userFilesPaths = Directory.GetFiles(@"../../Data/Users/");
+            var userFilesPaths = Directory.GetFiles(@"../../Data/Users/").Where(x => x != "../../Data/Users/.gitkeep");
 
             foreach (var userFile in userFilesPaths)
             {

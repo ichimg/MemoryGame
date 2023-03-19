@@ -12,7 +12,7 @@
     </Window.DataContext>
    
     <Grid>
-        <ListView d:ItemsSource="{Binding Users}" Margin="0,57,0,82" HorizontalAlignment="Center" Width="280">
+        <ListView Name="StatisticsView" d:ItemsSource="{Binding Users}" Margin="0,57,0,82" HorizontalAlignment="Center" Width="280">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="140" Header="Name"

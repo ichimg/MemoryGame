@@ -27,5 +27,6 @@
         <Button Style="{StaticResource OrangeButton}" Content="Play" FontSize="15" HorizontalAlignment="Left" Width="110" Margin="473,331,0,0" VerticalAlignment="Top" Click="PlayButtonClick"/>
         <Button Style="{StaticResource OrangeButton}" Content="Cancel" FontSize="15" HorizontalAlignment="Left" Width="110" Margin="643,331,0,0" VerticalAlignment="Top" Click="CancelButtonClick"/>
         <Rectangle HorizontalAlignment="Left" Height="209" Margin="461,73,0,0" Stroke="Black" VerticalAlignment="Top" Width="198"/>
+        <Image Source="/PairsGame;component/Data/logo1.png" HorizontalAlignment="Center" Height="48" Margin="0,10,0,0" VerticalAlignment="Top" Width="250"/>
     </Grid>
 </Window>
