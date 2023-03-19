@@ -10,8 +10,15 @@
     <Window.DataContext>
         <local:CardData/>
     </Window.DataContext>
-    
-    <Grid>
+
+
+            
+        <Grid>
+        <Menu Name="MenuControl" DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Save Game" Click="FileSaveGameClick" />
+            </MenuItem>
+        </Menu>
         <ItemsControl ItemsSource="{Binding ButtonCards}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -34,7 +41,7 @@
                                         Width= "151"	
                                         Height = "93"	
                                         Margin="10" Visibility="Collapsed">
-                                        <Image Source="{Binding}"/>
+                                        <Image Source="{Binding }"/>
                                     </Button>
                                 </Grid>
                                 

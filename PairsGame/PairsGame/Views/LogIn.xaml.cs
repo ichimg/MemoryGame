@@ -52,7 +52,12 @@ namespace PairsGame
 
         private void PlayButtonClick(object sender, RoutedEventArgs e)
         {
-            PlayWindow playWindow = new PlayWindow();
+            if(SelectedUser is null)
+            {
+                MessageBox.Show(this, "A user needs to be selected!", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                return;
+            }    
+            PlayWindow playWindow = new PlayWindow(SelectedUser);
             playWindow.Show();
             Close();
         }

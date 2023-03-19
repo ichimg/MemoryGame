@@ -1,27 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Threading;
+
 
 namespace PairsGame
 {
     public class GameEngine
     {
-        private ObservableCollection<List<string>> Board { get; set; }
+        private List<List<string>> Board { get; set; }
         public int Rows { get; set; }
         public int Columns { get; set; }
 
        public GameEngine(int rows, int columns)
         {
-            Board = new ObservableCollection<List<string>>();
+            Board = new List<List<string>>();
             Rows = rows;
             Columns = columns;
             InitializeBoard();
+        }
+
+        public GameEngine(List<List<string>> savedBoard) 
+        {
+            if(savedBoard is null)
+                throw new ArgumentNullException(nameof(savedBoard));
+
+            Board = savedBoard;
+            CardData.ButtonCards = Board;
         }
 
        private void InitializeBoard()

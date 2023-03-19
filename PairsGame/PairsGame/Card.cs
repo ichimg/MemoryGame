@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace PairsGame
 {
@@ -13,6 +14,18 @@ namespace PairsGame
 
             Id = id;
             Path = path;
+        }
+
+        public Card(SerializationInfo info, StreamingContext ctxt)
+        {
+            Id = (int)info.GetValue("Id", typeof(int));
+            Path = (string)info.GetValue("Path", typeof(string));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            info.AddValue("Id", Id);
+            info.AddValue("Path", Path);
         }
     }
 }

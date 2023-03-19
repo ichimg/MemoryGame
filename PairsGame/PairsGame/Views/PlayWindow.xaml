@@ -9,9 +9,8 @@
     <DockPanel>
         <Menu Name="MenuControl" DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="New Game" Click="FileNeGameClick"/>
-                <MenuItem Header="Open Game" />
-                <MenuItem Header="Save Game" />
+                <MenuItem Header="New Game" Click="FileNewGameClick"/>
+                <MenuItem Header="Open Game" Click="FileOpenGameClick"/>
                 <MenuItem Header="Statistics" />
                 <Separator />
                 <MenuItem Header="Exit" Click="FileExitClick"/>
