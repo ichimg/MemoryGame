@@ -24,13 +24,14 @@ namespace PairsGame
 
         private void GetUsersFromFiles()
         {
-            var userFilesPaths = Directory.GetFiles(@"../../Data/Users/");
+            var userFilesPaths = Directory.GetFiles(@"../../Data/Users/").Where(x => x != "../../Data/Users/.gitkeep");
 
             foreach (var userFile in userFilesPaths)
             {
                 using (StreamReader streamReader = new StreamReader(userFile))
                 {
-                    Users.Add(new User (streamReader.ReadLine(), streamReader.ReadLine(), Guid.Parse(streamReader.ReadLine())));
+                    User user = new User(streamReader.ReadLine(), streamReader.ReadLine(), Guid.Parse(streamReader.ReadLine()), Int32.Parse(streamReader.ReadLine()));
+                    Users.Add(user);
                 }
             }
         }

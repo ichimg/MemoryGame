@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PairsGame"
         mc:Ignorable="d"
-        Title="PlayWindow" Height="300" Width="400">
+        Title="Play" Height="300" Width="400">
     <DockPanel>
         <Menu Name="MenuControl" DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="New Game" Click="FileNeGameClick"/>
-                <MenuItem Header="Open Game" />
-                <MenuItem Header="Save Game" />
-                <MenuItem Header="Statistics" />
+                <MenuItem Header="New Game" Click="FileNewGameClick"/>
+                <MenuItem Header="Open Game" Click="FileOpenGameClick"/>
+                <MenuItem Header="Statistics" Click="FileStatisticsClick"/>
                 <Separator />
                 <MenuItem Header="Exit" Click="FileExitClick"/>
             </MenuItem>

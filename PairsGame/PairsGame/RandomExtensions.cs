@@ -4,9 +4,10 @@ using System.Collections.ObjectModel;
 
 namespace PairsGame
 {
-    public class RandomExtensions
+    public static class RandomExtensions
     {
-        public static void Shuffle<T>(Random random, ObservableCollection<List<T>> list)
+        private static Random rng = new Random();
+        public static void Shuffle<T>(Random random, List<List<T>> list)
         {
             int lengthRow = list[0].Count;
 
@@ -24,5 +25,19 @@ namespace PairsGame
                 list[j0][j1] = temp;
             }
         }
+
+            public static void Shuffle<T>(this IList<T> list)
+            {
+                int n = list.Count;
+                while (n > 1)
+                {
+                    n--;
+                    int k = rng.Next(n + 1);
+                    T value = list[k];
+                    list[k] = list[n];
+                    list[n] = value;
+                }
+            }
+        
     }
 }

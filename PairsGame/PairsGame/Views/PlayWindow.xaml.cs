@@ -1,5 +1,8 @@
-﻿using System;
+﻿using PairsGame.Views;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +24,13 @@ namespace PairsGame
     {
         private int Rows { get; set ; }
         private int Cols { get; set; }
-        public PlayWindow()
+        private readonly User ActiveUser;
+        public PlayWindow(User user)
         {
             InitializeComponent();
             Rows = 5;
             Cols = 6;
+            ActiveUser = user;
         }
 
         private void FileExitClick(object sender, RoutedEventArgs e)
@@ -39,9 +44,23 @@ namespace PairsGame
             aboutWindow.ShowDialog();
         }
 
-        private void FileNeGameClick(object sender, RoutedEventArgs e)
+        private void FileNewGameClick(object sender, RoutedEventArgs e)
         {
-            GameWindow gameWindow = new GameWindow(Rows, Cols);
+            GameWindow gameWindow = new GameWindow(ActiveUser, Rows, Cols);
+            gameWindow.ShowDialog();
+        }
+
+        private void FileOpenGameClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsAnyGameSaved())
+            {
+                MessageBox.Show(this, "You don't have any game saved!", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                return; 
+            }
+
+            var savedBoard = DeserializeCards();
+            var currentLevel = DeserializeCurrentLevel();
+            GameWindow gameWindow = new GameWindow(ActiveUser, savedBoard, currentLevel);
             gameWindow.ShowDialog();
         }
 
@@ -58,6 +77,34 @@ namespace PairsGame
             customGameWindow.ShowDialog();
             Rows = customGameWindow.Rows;
             Cols = customGameWindow.Cols;
+        }
+
+        public List<List<string>> DeserializeCards()
+        {
+            Serializer serializer = new Serializer();
+            ObjectToSerialize objectToSerialize = serializer.DeserializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt");
+            return objectToSerialize.Cards;
+        }
+
+        public int DeserializeCurrentLevel()
+        {
+            Serializer serializer = new Serializer();
+            ObjectToSerialize objectToSerialize = serializer.DeserializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt");
+            return objectToSerialize.CurrentLevel;
+        }
+
+        private bool IsAnyGameSaved()
+        {
+            var saves = Directory.GetFiles("../../Data/Users/saves/").Where(x=> x == $"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt").ToList();
+            if (saves.Count == 0)
+                return false;
+            return true;
+        }
+
+        private void FileStatisticsClick(object sender, RoutedEventArgs e)
+        {
+            StatisticsWindow statisticsWindow = new StatisticsWindow();
+            statisticsWindow.ShowDialog();
         }
     }
 }
