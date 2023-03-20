@@ -49,6 +49,17 @@ namespace PairsGame
             {
                 File.Delete(FileToDelete);
             }
+
+            var SaveFileToDelete = Directory.GetFiles(@"../../Data/Users/saves")
+                .Where(x => x.Equals($"../../Data/Users/saves\\user-{Name}-{Guid}-save.txt")).FirstOrDefault();
+
+            if (SaveFileToDelete is null)
+                return;
+
+            if(File.Exists(SaveFileToDelete))
+            {
+                File.Delete(SaveFileToDelete);
+            }
         }
 
         public bool Equals(User other)

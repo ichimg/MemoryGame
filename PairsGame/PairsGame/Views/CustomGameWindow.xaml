@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PairsGame"
         mc:Ignorable="d"
-        Title="CustomGameWindow" Height="180" Width="220">
+        Title="Customize" Height="180" Width="220">
     <Grid>
         <ComboBox Name="RowsBox" HorizontalAlignment="Left" Margin="70,22,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="2"></ComboBoxItem>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PairsGame"
         mc:Ignorable="d"
-        Title="PlayWindow" Height="300" Width="400">
+        Title="Play" Height="300" Width="400">
     <DockPanel>
         <Menu Name="MenuControl" DockPanel.Dock="Top">
             <MenuItem Header="_File">
