@@ -10,7 +10,7 @@ namespace PairsGame
 {
     internal class Serializer
     {
-        public void SerializeObject(string filename, ObjectToSerialize objectToSerialize)
+        public void SerializeObject(string filename, SaveGame objectToSerialize)
         {
             using (Stream stream = File.Open(filename, FileMode.Create))
             {
@@ -19,13 +19,13 @@ namespace PairsGame
             }
         }
 
-        public ObjectToSerialize DeserializeObject(string filename)
+        public SaveGame DeserializeObject(string filename)
         {
-            ObjectToSerialize objectToSerialize;
+            SaveGame objectToSerialize;
             using (Stream stream = File.Open(filename, FileMode.Open))
             {
                 BinaryFormatter bFormatter = new BinaryFormatter();
-                objectToSerialize = (ObjectToSerialize)bFormatter.Deserialize(stream);
+                objectToSerialize = (SaveGame)bFormatter.Deserialize(stream);
             }
             return objectToSerialize;
         }

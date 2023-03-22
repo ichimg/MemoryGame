@@ -74,12 +74,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Card.cs" />
-    <Compile Include="ObjectToSerialize.cs" />
+    <Compile Include="SaveGame.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="Views\CustomGameWindow.xaml.cs">
       <DependentUpon>CustomGameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RandomExtensions.cs" />
+    <Compile Include="ListExtensions.cs" />
     <Compile Include="Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>

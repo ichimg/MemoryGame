@@ -60,7 +60,7 @@ namespace PairsGame
             LogIn LogInWindow = Application.Current.MainWindow as LogIn;
             LogInWindow.AddUser(newUser);
             UpdateList.DynamicInvoke();
-            MessageBox.Show("Your account has been created successfully!", "Account", MessageBoxButton.OKCancel);
+            MessageBox.Show(this, "Your account has been created successfully!", "Account", MessageBoxButton.OK, MessageBoxImage.Information);
             Close();
         }
     }

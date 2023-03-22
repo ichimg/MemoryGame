@@ -10,23 +10,26 @@ using System.Threading.Tasks;
 namespace PairsGame
 {
     [Serializable]
-    internal class ObjectToSerialize : ISerializable
+    internal class SaveGame : ISerializable
     {
         public List<List<string>> Cards;
         public int CurrentLevel;
+        public int CardsFound;
 
-        public ObjectToSerialize() { }
+        public SaveGame() { }
 
-        public ObjectToSerialize(SerializationInfo info, StreamingContext ctxt)
+        public SaveGame(SerializationInfo info, StreamingContext ctxt)
         {
             Cards = (List<List<string>>)info.GetValue("savedCards", typeof(List<List<string>>));
             CurrentLevel = (int)info.GetValue("currentLevel", typeof(int));
+            CardsFound = (int)info.GetValue("cardsFound", typeof(int));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("savedCards", Cards);
             info.AddValue("currentLevel", CurrentLevel);
+            info.AddValue("cardsFound", CardsFound);
         }
     }
 }
