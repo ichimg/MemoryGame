@@ -43,8 +43,7 @@ namespace PairsGame
                 }
                 Board.Add(innerList);
             }
-            Random random = new Random();
-            RandomExtensions.Shuffle<string>(random, Board);
+            Board.Shuffle();
             CardData.ButtonCards = Board;
         }
 
@@ -61,7 +60,6 @@ namespace PairsGame
             cards[0].Value.Visibility = System.Windows.Visibility.Hidden;
             cards[1].Key.Visibility = System.Windows.Visibility.Hidden;
             cards[1].Value.Visibility = System.Windows.Visibility.Hidden;
-
         }
 
         public void HideUnmatching(List<KeyValuePair<Button, Button>> cards)

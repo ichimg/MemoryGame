@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:PairsGame"
         mc:Ignorable="d"
         Title="Memory Game" Height="1080" Width="1920">
-    
+
     <Window.DataContext>
         <local:CardData/>
     </Window.DataContext>
 
 
-            
-        <Grid>
+
+    <Grid>
         <Menu Name="MenuControl" DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem Header="Save Game" Click="FileSaveGameClick" />
@@ -31,7 +31,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid x:Name="buttonGrid">
-                                    <Button Name="EmptyButton"
+                                    <Button Style="{StaticResource OrangeButton}" Name="EmptyButton"
                                         Width= "151"	
                                         Height = "93"	
                                         Margin="10"
@@ -44,7 +44,8 @@
                                         <Image Source="{Binding}"/>
                                     </Button>
                                 </Grid>
-                                
+
+
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -53,6 +54,11 @@
         </ItemsControl>
         <Button Style="{StaticResource OrangeButton}" Name="NextLevel" Width= "151"	Content="Next level" FontSize="20"
                                         Height = "50" Visibility="Visible" Margin="1300, 660, 0, 0" Click="NextLevelClick"/>
+        <Canvas ClipToBounds="False">
+            <Label Name="userLabel" Content="ActiveUser" Panel.ZIndex="10" FontFamily="Micro Six" FontSize="30" Canvas.Left="40" Canvas.Top="532" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Current Level: " Panel.ZIndex="1" FontFamily="Micro Six" FontSize="20" Canvas.Top="507" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="38"/>
+            <Label Name="currentLevelLabel" Content="0" Panel.ZIndex="2" FontFamily="Micro Six" FontSize="20" Canvas.Left="224" Canvas.Top="507" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Canvas>
 
         <Image Name="ActiveUserImage" Source="/PairsGame;component/Data/images/lion.jpeg" Height="200" Width="200" Margin="-1250, 560, 0, 0" Stretch="Fill"/>
     </Grid>

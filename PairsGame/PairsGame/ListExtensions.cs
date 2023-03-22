@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace PairsGame
 {
-    public static class RandomExtensions
+    public static class ListExtensions
     {
-        private static Random rng = new Random();
-        public static void Shuffle<T>(Random random, List<List<T>> list)
+        public static void Shuffle<T>(this List<List<T>> list)
         {
+            Random random = new Random();
             int lengthRow = list[0].Count;
 
             for (int i = list.Count * lengthRow - 1; i > 0; i--)
@@ -28,11 +27,12 @@ namespace PairsGame
 
             public static void Shuffle<T>(this IList<T> list)
             {
+                Random random = new Random();
                 int n = list.Count;
                 while (n > 1)
                 {
                     n--;
-                    int k = rng.Next(n + 1);
+                    int k = random.Next(n + 1);
                     T value = list[k];
                     list[k] = list[n];
                     list[n] = value;

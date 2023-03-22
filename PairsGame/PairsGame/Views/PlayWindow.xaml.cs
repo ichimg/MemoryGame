@@ -60,7 +60,8 @@ namespace PairsGame
 
             var savedBoard = DeserializeCards();
             var currentLevel = DeserializeCurrentLevel();
-            GameWindow gameWindow = new GameWindow(ActiveUser, savedBoard, currentLevel);
+            var cardsFound = DeserializeCardsFound();
+            GameWindow gameWindow = new GameWindow(ActiveUser, savedBoard, currentLevel, cardsFound);
             gameWindow.ShowDialog();
         }
 
@@ -68,7 +69,7 @@ namespace PairsGame
         {
             Rows = 5;
             Cols = 6;
-            MessageBox.Show($"Game mode set at: {Rows * Cols} cards ");
+            MessageBox.Show(this, $"Game mode set at: {Rows * Cols} cards ", "Mode", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OptionsCustomClick(object sender, RoutedEventArgs e)
@@ -82,15 +83,22 @@ namespace PairsGame
         public List<List<string>> DeserializeCards()
         {
             Serializer serializer = new Serializer();
-            ObjectToSerialize objectToSerialize = serializer.DeserializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt");
+            SaveGame objectToSerialize = serializer.DeserializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt");
             return objectToSerialize.Cards;
         }
 
         public int DeserializeCurrentLevel()
         {
             Serializer serializer = new Serializer();
-            ObjectToSerialize objectToSerialize = serializer.DeserializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt");
+            SaveGame objectToSerialize = serializer.DeserializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt");
             return objectToSerialize.CurrentLevel;
+        }
+
+        public int DeserializeCardsFound()
+        {
+            Serializer serializer = new Serializer();
+            SaveGame objectToSerialize = serializer.DeserializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt");
+            return objectToSerialize.CardsFound;
         }
 
         private bool IsAnyGameSaved()

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace PairsGame
@@ -18,13 +19,12 @@ namespace PairsGame
     {
         List<KeyValuePair<Button, Button>> cards;
         List<List<string>> cardsForNextLevel;
-        List<KeyValuePair<Button, Button>> buttons;
+        int CardsFound;
         User ActiveUser;
         private GameEngine GameEngine { get; set; }
         int CurrentLevel = 1;
         public GameWindow(User selectedUser, int rows, int columns)
         {
-            buttons = new List<KeyValuePair<Button, Button>>();
             ActiveUser = selectedUser;
             cards = new List<KeyValuePair<Button, Button>>();
             GameEngine = new GameEngine(rows, columns);
@@ -33,19 +33,25 @@ namespace PairsGame
             InitializeComponent();
             Uri uri = new Uri(ActiveUser.ImagePath, uriKind: UriKind.Relative);
             ActiveUserImage.Source = new BitmapImage(uri);
+            SetResourceReference(BackgroundProperty, SystemColors.ControlBrushKey);
+            userLabel.Content = ActiveUser.Name;
+            
+            currentLevelLabel.Content = CurrentLevel;
         }
 
-        public GameWindow(User selectedUser, List<List<string>> savedBoard, int currentLevel)
+        public GameWindow(User selectedUser, List<List<string>> savedBoard, int currentLevel, int cardsFound)
         {
-            buttons = new List<KeyValuePair<Button, Button>>();
             ActiveUser = selectedUser;
             cards = new List<KeyValuePair<Button, Button>>();
             GameEngine = new GameEngine(savedBoard);
             cardsForNextLevel = CardData.ButtonCards;
             CurrentLevel = currentLevel;
+            CardsFound = cardsFound;
             InitializeComponent();
             Uri uri = new Uri(ActiveUser.ImagePath, uriKind: UriKind.Relative);
             ActiveUserImage.Source = new BitmapImage(uri);
+            userLabel.Content = ActiveUser.Name;
+            currentLevelLabel.Content = CurrentLevel;
         }
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
@@ -74,7 +80,7 @@ namespace PairsGame
             if (GameEngine.IsMatching(cards))
             {
                 GameEngine.RemoveMatching(cards);
-                buttons.AddRange(cards);
+                CardsFound += 2;
                 CardData.ButtonCards = CardData.ButtonCards.Select(x => x.Where(card => card != cards[0].Value.DataContext as string).ToList()).ToList();
             }
             else
@@ -88,29 +94,30 @@ namespace PairsGame
         private void FileSaveGameClick(object sender, RoutedEventArgs e)
         {
             Serialize();
-            MessageBox.Show("Game saved successfully!");
+            MessageBox.Show(this, "Game saved successfully!", "Save", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             Close();
         }
 
         public void Serialize()
         {
-            ObjectToSerialize objectToSerialize = new ObjectToSerialize();
-            objectToSerialize.Cards = CardData.ButtonCards;
-            objectToSerialize.CurrentLevel = CurrentLevel;
+            SaveGame saveGame = new SaveGame();
+            saveGame.Cards = CardData.ButtonCards;
+            saveGame.CurrentLevel = CurrentLevel;
+            saveGame.CardsFound = CardsFound;
             Serializer serializer = new Serializer();
-            serializer.SerializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt", objectToSerialize);
+            serializer.SerializeObject($"../../Data/Users/saves/user-{ActiveUser.Name}-{ActiveUser.Guid}-save.txt", saveGame);
         }
 
         private void NextLevelClick(object sender, RoutedEventArgs e)
         {
-            if (buttons.Count != cardsForNextLevel.Count * cardsForNextLevel[0].Count)
+            if (CardsFound != cardsForNextLevel.Count * cardsForNextLevel[0].Count)
             {
-                MessageBox.Show(this, "Finish the current game first!", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                MessageBox.Show(this, "Finish the current level first!", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                 return;
             }
             if(CurrentLevel >= 3)
             {
-                MessageBox.Show(this, "Congratulations! You win!", "Win", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                MessageBox.Show(this, "Congratulations! You win!", "Win", MessageBoxButton.OK, MessageBoxImage.Information);
                 ActiveUser.CountWin();
                 Close();
                 return;
@@ -120,23 +127,15 @@ namespace PairsGame
 
         private void RefreshBoard()
         {
-            if (buttons.Count == 0) return;
-
+            CardsFound = 0;
             CurrentLevel++;
-            Random random = new Random();
-            var ButtonCards = cardsForNextLevel;
-            foreach (var pair in buttons)
-            {
-                pair.Key.Visibility = Visibility.Visible;
-                Panel.SetZIndex(pair.Key, 0);
-                Panel.SetZIndex(pair.Value, 0);
-                pair.Value.Visibility = Visibility.Collapsed;
-            }
-            RandomExtensions.Shuffle(random, cardsForNextLevel);
+            currentLevelLabel.Content = CurrentLevel;
+            cardsForNextLevel.Shuffle();
+
             CardData.ButtonCards = cardsForNextLevel;
             CardItemsControl.ItemsSource = cardsForNextLevel;
+
             CardItemsControl.Items.Refresh();
-            buttons.Clear();
         }
 
     }
